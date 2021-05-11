@@ -6,8 +6,9 @@
 
 #define SOLUTION "METHINKS IT IS LIKE A WEASEL"
 #define NUM_OFFSPRING 50
+//Definição das bibliotecas e da variáveis globais
 
-char random_char() {
+char random_char() {//Função de geração de um caractere aleatório
 	char new_char;
 	int random = (int) (((float) rand() / RAND_MAX) * 27);
 
@@ -18,9 +19,9 @@ char random_char() {
 	}
 
 	return new_char;
-}
+} 
 
-char * random_string(int length) {
+char * random_string(int length) {//Função de geração da sequência aleatória de 28 caracteres
 	int i;
 	char * new_string = malloc(sizeof(char[length + 1]));
 
@@ -36,9 +37,9 @@ char * random_string(int length) {
 	new_string[length] = '\0';
 
 	return new_string;
-}
+} 
 
-float compare(char * string1, char * string2) {
+float compare(char * string1, char * string2) {//Função para comparar a sequência filha com a sequência alvo
 	int i, sum, minlen;
 
 	minlen = fmin(strlen(string1), strlen(string2));
@@ -53,7 +54,7 @@ float compare(char * string1, char * string2) {
 	return (float) sum / minlen;
 }
 
-void mutate(char * child) {
+void mutate(char * child) {//Função para fazer a mutação de 1 caractere em uma posição especificada
 	int len = strlen(child);
 	int index = ((float) rand() / RAND_MAX) * len;
 	char new_char = random_char();
@@ -61,7 +62,7 @@ void mutate(char * child) {
 	child[index] = new_char;
 }
 
-char ** reproduce(int num_children, char * parent, int length) {
+char ** reproduce(int num_children, char * parent, int length) {//Função para gerar 1 sequência modificada
 	int i;
 	char ** children = malloc(sizeof(char * [num_children]));
 
@@ -70,7 +71,7 @@ char ** reproduce(int num_children, char * parent, int length) {
 		exit(1);
 	}
 
-	for (i = 0; i < num_children; i++) {
+	for (i = 0; i < num_children; i++) {//laço para copiar os caracteres certos da sequencia pai
 		children[i] = malloc(sizeof(char[length + 1]));
 
 		if (!children[i]) {
@@ -87,16 +88,16 @@ char ** reproduce(int num_children, char * parent, int length) {
 
 int main() {
 	int i, finished = 0, generation = 1;
-	int length = strlen(SOLUTION);
-	char *parent = random_string(length);
-	char **children;
+	int length = strlen(SOLUTION);//tamanho do alvo
+	char *parent = random_string(length); // geração da 1 sequência (pai)
+	char **children; // inicialização da sequência filha
 
 	srand(time(0));
 
 	while (!finished) {
 		int top_index = 0;
 		float top_score = 0.0;
-		children = reproduce(NUM_OFFSPRING, parent, length);
+		children = reproduce(NUM_OFFSPRING, parent, length);//sequencia filha recebe a sequencia pai
 		printf("Generation: %i", generation);
 		for (i = 0; i < NUM_OFFSPRING; i++) {
 			float this_score = compare(children[i], SOLUTION);
