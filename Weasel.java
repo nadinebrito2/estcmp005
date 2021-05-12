@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Weasel {
+    public static int score = 0;
     static Random rand = new Random();
 
     private String generateRandomSequence(String goal, String characters){
@@ -24,6 +25,8 @@ public class Weasel {
                 bestSeq = seq;
             }
         }
+        score = bestSimilarityFactor;
+
         return bestSeq;
     }
 
@@ -56,7 +59,6 @@ public class Weasel {
     }
 
     public static void main(String[] args){
-
         final String goal = "METHINKS IT IS LIKE A WEASEL";
         final String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
         int generations = 0;
@@ -64,11 +66,11 @@ public class Weasel {
         Weasel weasel = new Weasel();
         String currentSequence = weasel.generateRandomSequence(goal, characters);
 
-        System.out.println("Generation: " + generations + " " + currentSequence);
+        System.out.println("Generation: " + generations + " " + currentSequence + " | Score: " + weasel.score);
         while(!currentSequence.equals(goal)){
             currentSequence = weasel.getMutatedSequence(currentSequence, goal, characters);
             generations++;
-            System.out.println("Generation: " + generations + " " + currentSequence);
+            System.out.println("Generation: " + generations + " " + currentSequence + " | Score: " + weasel.score);
         }
     }
 
