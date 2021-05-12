@@ -5,7 +5,7 @@
 #include <time.h>
 
 #define SOLUTION "METHINKS IT IS LIKE A WEASEL"
-#define NUM_OFFSPRING 50
+#define NUM_OFFSPRING 100
 //Definição das bibliotecas e da variáveis globais
 
 char random_char() {//Função de geração de um caractere aleatório
@@ -19,7 +19,7 @@ char random_char() {//Função de geração de um caractere aleatório
 	}
 
 	return new_char;
-} 
+}
 
 char * random_string(int length) {//Função de geração da sequência aleatória de 28 caracteres
 	int i;
@@ -37,7 +37,7 @@ char * random_string(int length) {//Função de geração da sequência aleatór
 	new_string[length] = '\0';
 
 	return new_string;
-} 
+}
 
 float compare(char * string1, char * string2) {//Função para comparar a sequência filha com a sequência alvo
 	int i, sum, minlen;
@@ -71,7 +71,7 @@ char ** reproduce(int num_children, char * parent, int length) {//Função para 
 		exit(1);
 	}
 
-	for (i = 0; i < num_children; i++) {//laço para copiar os caracteres certos da sequencia pai
+	for (i = 0; i < num_children; i++) {//Laço para copiar os caracteres certos da sequencia pai
 		children[i] = malloc(sizeof(char[length + 1]));
 
 		if (!children[i]) {
@@ -97,17 +97,17 @@ int main() {
 	while (!finished) {
 		int top_index = 0;
 		float top_score = 0.0;
-		children = reproduce(NUM_OFFSPRING, parent, length);//sequencia filha recebe a sequencia pai
+		children = reproduce(NUM_OFFSPRING, parent, length);//sequência filha recebe a sequencia pai
 		printf("Generation: %i", generation);
-		for (i = 0; i < NUM_OFFSPRING; i++) {
+		for (i = 0; i < NUM_OFFSPRING; i++) {// Criação de 100 comparações com a sequência e o alvo pegando a sequencia com maior score
 			float this_score = compare(children[i], SOLUTION);
 			if (this_score > top_score) {
 				top_score = this_score;
 				top_index = i;
 			}
 		}
-		strncpy(parent, children[top_index], length + 1);
-		printf(" %s\n", parent);
+		strncpy(parent, children[top_index], length + 1);//Variável com maior score é copiada para a variável pai
+		printf(" %s | Score: %.2f \n", parent,top_score);
 
 		for (i = 0; i < NUM_OFFSPRING; i++) {
 			free(children[i]);
