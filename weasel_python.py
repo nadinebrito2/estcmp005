@@ -10,13 +10,12 @@ def get_mutated_sequence(sequence, goal, characters,score):#Função que retorna
 	sequence_list = get_sequence_mutations(sequence, characters)
 	best_seq = sequence_list[0]
 	best_similarity_factor = get_score(best_seq, goal)
-	for seq in sequence_list:
+	for seq in sequence_list:                         # Verifica se a nota atual da seq. é maior do que a anterior e atualiza a sequencia com a melhor pontuação.
 		similarity_factor = get_score(seq, goal)		
 		if similarity_factor > best_similarity_factor:
 			best_similarity_factor = similarity_factor
 			best_seq = seq
 	score = best_similarity_factor
-
 	return best_seq, score
 	
 def get_sequence_mutations(sequence, characters): #Função que gera 100 cópias modificadas da sequência atual
@@ -46,9 +45,9 @@ def main():
 	goal = "METHINKS IT IS LIKE A WEASEL"
 	characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
 	generations = 0
-	current_sequence = generate_random_sequence(goal, characters)
-	print("Generation:", generations,current_sequence, "| Score:", score)
-	while current_sequence != goal:
+	current_sequence = generate_random_sequence(goal, characters) # Sequencia atual recebe a sequencia gerada alearória
+	print("Generation:", generations,current_sequence, "| Score:", score) 
+	while current_sequence != goal:  # Enquanto a sequencia atual for diferente do objetivo a seq. atual vai receber a seq. modificada que mais se parece com a meta.
 		current_sequence,score = get_mutated_sequence(current_sequence, goal, characters,score)
 		generations += 1
 		print("Generation:", generations,current_sequence, "| Score:", score)
