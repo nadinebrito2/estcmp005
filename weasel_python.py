@@ -1,12 +1,12 @@
 import random
 	
-def generate_random_sequence(goal, characters):
+def generate_random_sequence(goal, characters): #Função que gera a sequência aleatória de 28 caracteres
 	sequence = ""
 	for i in range(len(goal)):
 		sequence += characters[random.randint(0, len(characters)-1)]
 	return sequence
 	
-def get_mutated_sequence(sequence, goal, characters,score):
+def get_mutated_sequence(sequence, goal, characters,score):#Função que retorna a sequencia modificada que mais se parece com a meta (com o melhor score) 
 	sequence_list = get_sequence_mutations(sequence, characters)
 	best_seq = sequence_list[0]
 	best_similarity_factor = get_score(best_seq, goal)
@@ -19,13 +19,13 @@ def get_mutated_sequence(sequence, goal, characters,score):
 
 	return best_seq, score
 	
-def get_sequence_mutations(sequence, characters):
+def get_sequence_mutations(sequence, characters): #Função que gera 100 cópias modificadas da sequência atual
 	sequence_list = []
 	for i in range(100):
 		sequence_list.append(mutate_sequence(sequence, characters))
 	return sequence_list
 	
-def mutate_sequence(sequence, characters):
+def mutate_sequence(sequence, characters):#Função que retorna uma sequência modificada aleatoriamente com 5% chance de mutação
 	result = ""
 	for i in range(len(sequence)):
 		if random.randint(0, 100) <= 5:
@@ -34,7 +34,7 @@ def mutate_sequence(sequence, characters):
 			result += sequence[i]
 	return result
 	
-def get_score(sequence, goal):
+def get_score(sequence, goal):#Função para obter o score de ua sequência
 	score = 0
 	for i in range(len(goal)):
 		if goal[i] == sequence[i]:
