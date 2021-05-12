@@ -6,7 +6,7 @@ def generate_random_sequence(goal, characters):
 		sequence += characters[random.randint(0, len(characters)-1)]
 	return sequence
 	
-def get_mutated_sequence(sequence, goal, characters):
+def get_mutated_sequence(sequence, goal, characters,score):
 	sequence_list = get_sequence_mutations(sequence, characters)
 	best_seq = sequence_list[0]
 	best_similarity_factor = get_score(best_seq, goal)
@@ -15,7 +15,9 @@ def get_mutated_sequence(sequence, goal, characters):
 		if similarity_factor > best_similarity_factor:
 			best_similarity_factor = similarity_factor
 			best_seq = seq
-	return best_seq 
+	score = best_similarity_factor
+
+	return best_seq, score
 	
 def get_sequence_mutations(sequence, characters):
 	sequence_list = []
@@ -40,14 +42,16 @@ def get_score(sequence, goal):
 	return score
 
 def main():
+	score = 0
 	goal = "METHINKS IT IS LIKE A WEASEL"
 	characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ "
 	generations = 0
 	current_sequence = generate_random_sequence(goal, characters)
-	print("Generation:", generations,current_sequence)
+	print("Generation:", generations,current_sequence, "| Score:", score)
 	while current_sequence != goal:
-		current_sequence = get_mutated_sequence(current_sequence, goal, characters)
+		current_sequence,score = get_mutated_sequence(current_sequence, goal, characters,score)
 		generations += 1
-		print("Generation:", generations,current_sequence)
+		print("Generation:", generations,current_sequence, "| Score:", score)
 		
 main()
+
