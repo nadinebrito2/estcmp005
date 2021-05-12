@@ -6,7 +6,7 @@ def generate_random_sequence(goal, characters): #Função que gera a sequência 
 		sequence += characters[random.randint(0, len(characters)-1)]
 	return sequence
 	
-def get_mutated_sequence(sequence, goal, characters,score):#Função que retorna a sequencia modificada que mais se parece com a meta (com o melhor score) 
+def get_mutated_sequence(sequence, goal, characters,score):#Função que retorna a sequência modificada que mais se parece com a meta (com o melhor score) 
 	sequence_list = get_sequence_mutations(sequence, characters)
 	best_seq = sequence_list[0]
 	best_similarity_factor = get_score(best_seq, goal)
@@ -34,7 +34,7 @@ def mutate_sequence(sequence, characters):#Função que retorna uma sequência m
 			result += sequence[i]
 	return result
 	
-def get_score(sequence, goal):#Função para obter o score de ua sequência
+def get_score(sequence, goal):#Função para obter o score de uma sequência
 	score = 0
 	for i in range(len(goal)):
 		if goal[i] == sequence[i]:
