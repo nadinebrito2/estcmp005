@@ -1,4 +1,4 @@
-; nasm -f elf64 main.asm && gcc -no-pie main.o && ./a.out   
+; nasm -f elf64 q4.asm && gcc -no-pie q4.o && ./a.out   
     global main
     extern printf
     extern scanf
