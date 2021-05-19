@@ -12,7 +12,13 @@ int main()
 	
 	media = ((p1+p2)/2);
 	
-	printf("sua media eh %.1f ", media);
+	if(media < 8){
+		printf("sua media eh %.1f, precisa fazer prova final! ", media);
+	}else{
+			printf("sua media eh %.1f, aprovado!", media);
+	}
+	
+
 
 	return 0;
 }

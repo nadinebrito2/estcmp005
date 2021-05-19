@@ -11,7 +11,11 @@ int main()
 	
 	media = ((p1+p2)/2);
 	
-	std::cout << "sua media eh " << media;
+	if(media < 8){
+		std::cout << "sua media eh " << media << " precisa fazer prova final!";
+	}else{
+		std::cout << "sua media eh " << media << " Aprovado!";
+	}
 
 	return 0;
 }
