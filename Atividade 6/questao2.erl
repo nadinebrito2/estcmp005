@@ -1,4 +1,4 @@
--module(fibo).
+-module(questao2).
 -export([fib/1]).
 
 fib(0) -> 0;
