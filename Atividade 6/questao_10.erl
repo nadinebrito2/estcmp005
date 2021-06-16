@@ -1,4 +1,4 @@
--module (questao10).
+-module (questao_10).
 -export ([cauda/1]).
 
 aux(X,Y) ->
