@@ -14,17 +14,17 @@ process(M, N) ->
       lists:seq(N, 2, -1)),
       statistics(runtime),
       H ! M.
-      %%mthread(1, H, M).
+      mthread(1, H, M).
 
 mthread(Id, Pid, M) ->
   receive
       0 -> 
         {_, Time} = statistics(runtime),
-        io:format("Thread ~p: ~p processos cedidos em ~p ms. Thread Finalizando ~n", [Pid, M, Time]),
+        io:format("Thread ~p: ~p processos cedidos em ~p ms. Thread Finalizando ~n", [self(), M, Time]),
         exit(self(), ok);
       Index ->
         Pid ! Index - 1,
-        io:format("Thread ~p: Cedendo pela ~p vez. ~n", [Id, Index]),
+        %io:format("Thread ~p: Cedendo pela ~p vez. ~n", [Id, Index]),
         mthread(Id, Pid, M)
   end.
 
